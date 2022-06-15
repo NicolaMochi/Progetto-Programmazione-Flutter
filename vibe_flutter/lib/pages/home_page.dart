@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:vibe_flutter/pages/LoginPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

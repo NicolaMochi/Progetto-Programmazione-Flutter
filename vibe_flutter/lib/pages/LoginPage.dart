@@ -26,12 +26,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<LoginPage> signOut() async {
-    await FirebaseAuth.instance.signOut();
-
-    return new LoginPage();
-  }
-
   @override
   void dispose() {
     _emailController.dispose();

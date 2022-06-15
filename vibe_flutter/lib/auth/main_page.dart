@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:vibe_flutter/LoginPage.dart';
+import 'package:vibe_flutter/auth/auth_page.dart';
+import 'package:vibe_flutter/pages/LoginPage.dart';
 
 import '../pages/home_page.dart';
 
@@ -17,7 +18,7 @@ class MainPage extends StatelessWidget {
             // se lo user c e allora ok e vai in homepage
             return HomePage();
           } else {
-            return LoginPage();
+            return AuthPage(); // dalla auth page sara o loginpage o register page
           }
         },
       ),
