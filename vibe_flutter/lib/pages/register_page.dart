@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -12,15 +15,109 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
+  final _stateController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _dateController = TextEditingController();
+  final _descriptionController = TextEditingController();
+
+  final databaseRef = FirebaseDatabase.instance.ref();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _nameController.dispose();
+    _surnameController.dispose();
+    _stateController.dispose();
+    _confirmPasswordController.dispose();
+    _dateController.dispose();
+    _descriptionController.dispose();
+
     super.dispose();
   }
 
-  Future signUp() async {}
+  bool checkFields(String email, String password, String name, String surname,
+      String confirmPassw, String date) {
+    if (email.isEmpty) {
+      return false;
+    }
+
+    if (password.isEmpty) {
+      return false;
+    }
+
+    if (name.isEmpty) {
+      return false;
+    }
+
+    if (surname.isEmpty) {
+      return false;
+    }
+
+    if (confirmPassw.isEmpty) {
+      return false;
+    }
+
+    if (date.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
+    print("fine check");
+  }
+
+  Future signUp() async {
+    var email = _emailController.text.trim();
+    var password = _passwordController.text.trim();
+    var name = _nameController.text.trim();
+    var surname = _surnameController.text.trim();
+    var confirmPassword = _confirmPasswordController.text.trim();
+    var state = _stateController.text.trim();
+    var birth = _dateController.text.trim();
+    var description = _descriptionController.text.trim();
+
+    var check =
+        checkFields(name, surname, email, password, confirmPassword, birth);
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+    //
+    if (check && passwordConfirmed()) {
+      try {
+        UserCredential usercred = await auth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        // aggiungi dettagli utente
+        addUserDetails(name, surname, password, state, birth, description);
+      } on FirebaseAuthException catch (e) {
+        print(e);
+      }
+    }
+  }
+
+  Future addUserDetails(String name, String surname, String password,
+      String state, String birth, String description) async {
+    await databaseRef.child('Users').push().set({
+      'name': name,
+      'surname': surname,
+      'password': password,
+      'state': state,
+      'birth': birth,
+      'description': description,
+    });
+  }
+
+  bool passwordConfirmed() {
+    if (_passwordController.text.trim() ==
+        _confirmPasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 Text(
                   'Registration',
                   style: TextStyle(
@@ -40,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       fontSize: 49,
                       color: Colors.orangeAccent),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 100),
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -53,6 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        keyboardType: TextInputType.emailAddress,
                         controller: _emailController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -62,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
                 // name textfield
                 Padding(
@@ -76,7 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
-                        controller: _passwordController,
+                        controller: _nameController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Insert your name',
@@ -85,7 +183,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
                 //surname
                 Padding(
@@ -99,16 +197,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
-                        controller: _passwordController,
+                        controller: _surnameController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Insert your name',
+                          hintText: 'Insert your surname',
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
                 //state
                 Padding(
@@ -122,17 +220,18 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
-                        controller: _passwordController,
+                        controller: _stateController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'whic state are you from',
+                          hintText: 'which state are you from',
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
+                // passw
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Container(
@@ -154,7 +253,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
                 // confrim password
                 Padding(
@@ -168,7 +267,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
-                        controller: _passwordController,
+                        controller: _confirmPasswordController,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -178,8 +277,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
+                // data
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Container(
@@ -191,8 +291,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
-                        controller: _passwordController,
-                        obscureText: true,
+                        keyboardType: TextInputType.datetime,
+                        controller: _dateController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Your date of birth',
@@ -201,7 +301,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -214,8 +314,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
-                        controller: _passwordController,
-                        obscureText: true,
+                        controller: _descriptionController,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Little description of yourself',
@@ -224,9 +323,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
-                // sign in button
+                // sign up button
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 100.0),
@@ -250,31 +349,24 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
 
                 // not registered?
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Not have an account?'),
+                    Text('I am registered! '),
                     GestureDetector(
-                      //onTap: widget.showRegisterPage,
+                      onTap: widget.showLoginPage,
                       child: Text(
-                        'Register here',
+                        'Login here',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
                 ),
+                SizedBox(height: 30),
               ],
-
-              // email text
-
-              // pass text
-
-              // login
-
-              // don t have an account register here
             ),
           ),
         ),

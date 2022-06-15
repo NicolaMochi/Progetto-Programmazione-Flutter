@@ -16,10 +16,11 @@ class _AuthPageState extends State<AuthPage> {
 
   void toggleScreens() {
     setState(() {
-      showLoginPage = showLoginPage;
+      showLoginPage = !showLoginPage;
     });
   }
 
+// gestion toggle, per il tocco sotto login button e registration button
   @override
   Widget build(BuildContext context) {
     if (showLoginPage) {
