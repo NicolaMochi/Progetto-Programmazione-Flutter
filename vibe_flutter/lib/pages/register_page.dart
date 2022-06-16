@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -23,6 +22,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final _descriptionController = TextEditingController();
 
   final databaseRef = FirebaseDatabase.instance.ref();
+
+  bool isPasswordVisible = true;
+  var _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -244,11 +246,19 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
                         controller: _passwordController,
-                        obscureText: true,
+                        //obscureText: true,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: isPasswordVisible
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility),
+                            onPressed: () => setState(
+                                () => isPasswordVisible = !isPasswordVisible),
+                          ),
                           border: InputBorder.none,
                           hintText: 'Insert your password',
                         ),
+                        obscureText: isPasswordVisible,
                       ),
                     ),
                   ),
@@ -268,11 +278,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
                         controller: _confirmPasswordController,
-                        obscureText: true,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: isPasswordVisible
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility),
+                            onPressed: () => setState(
+                                () => isPasswordVisible = !isPasswordVisible),
+                          ),
                           border: InputBorder.none,
                           hintText: 'Confirm your password',
                         ),
+                        obscureText: isPasswordVisible,
                       ),
                     ),
                   ),

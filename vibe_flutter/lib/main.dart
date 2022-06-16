@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:vibe_flutter/auth/auth_page.dart';
-import 'package:vibe_flutter/pages/home_page.dart';
-import 'package:vibe_flutter/pages/LoginPage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:vibe_flutter/auth/main_page.dart';
 
-import 'auth/main_page.dart';
+import 'package:vibe_flutter/pages/backup_home_page.dart';
+
+import 'package:vibe_flutter/pages/NavBar.dart';
+import 'package:vibe_flutter/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

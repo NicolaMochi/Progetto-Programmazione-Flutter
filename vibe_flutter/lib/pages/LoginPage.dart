@@ -17,6 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  bool isPasswordVisible = true;
+
 // log in autenticato email password
   Future signIn() async {
     UserCredential userCredential =
@@ -89,11 +91,18 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
                         controller: _passwordController,
-                        obscureText: true,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: isPasswordVisible
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility),
+                            onPressed: () => setState(
+                                () => isPasswordVisible = !isPasswordVisible),
+                          ),
                           border: InputBorder.none,
                           hintText: 'Password',
                         ),
+                        obscureText: isPasswordVisible,
                       ),
                     ),
                   ),
