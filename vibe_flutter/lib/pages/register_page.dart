@@ -70,6 +70,8 @@ class _RegisterPageState extends State<RegisterPage> {
     print("fine check");
   }
 
+  late UserCredential usercred;
+
   Future signUp() async {
     var email = _emailController.text.trim();
     var password = _passwordController.text.trim();
@@ -87,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
     //
     if (check && passwordConfirmed()) {
       try {
-        UserCredential usercred = await auth.createUserWithEmailAndPassword(
+        usercred = await auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
@@ -102,7 +104,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future addUserDetails(String name, String surname, String password,
       String state, String birth, String description) async {
-    await databaseRef.child('Users').push().set({
+    String? uid = usercred.user?.uid;
+    await databaseRef.child('Users').child(uid.toString()).set({
       'name': name,
       'surname': surname,
       'password': password,
