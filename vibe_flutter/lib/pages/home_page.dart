@@ -203,7 +203,7 @@ class _HomePageState extends State<HomePage> {
           ],*/
   }
 
-  Widget build1(BuildContext context) {
+  /*Widget build1(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
@@ -240,7 +240,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
+  }*/
 }
 
 
