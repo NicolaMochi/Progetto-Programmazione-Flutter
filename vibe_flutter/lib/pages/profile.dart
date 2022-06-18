@@ -94,14 +94,14 @@ class _ProfileState extends State<Profile> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    "Inshalla,",
+                    "Bentornato,",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
                   CircleAvatar(
-                    radius: 25,
+                    radius: 20,
                     backgroundColor: Colors.white,
                   )
                 ],

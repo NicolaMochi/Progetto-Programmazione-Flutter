@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vibe_flutter/pages/LoginPage.dart';
-import 'package:vibe_flutter/pages/register_page.dart';
+
+import 'package:vibe_flutter/pages/Reg.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _AuthPageState extends State<AuthPage> {
     if (showLoginPage) {
       return LoginPage(showRegisterPage: toggleScreens);
     } else {
-      return RegisterPage(
+      return Register(
           showLoginPage:
               toggleScreens); // cliccando sul tasto registra va nella pagina registra
     }

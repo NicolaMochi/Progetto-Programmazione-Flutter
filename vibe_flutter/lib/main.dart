@@ -4,7 +4,7 @@ import 'package:vibe_flutter/auth/main_page.dart';
 
 import 'package:vibe_flutter/pages/backup_home_page.dart';
 
-import 'package:vibe_flutter/pages/NavBar.dart';
+import 'package:vibe_flutter/navbar/NavBar.dart';
 import 'package:vibe_flutter/pages/home_page.dart';
 
 void main() async {

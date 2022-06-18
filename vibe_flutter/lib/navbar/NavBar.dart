@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:vibe_flutter/pages/accepted_page.dart';
-import 'package:vibe_flutter/pages/cerca_page.dart';
+import 'package:vibe_flutter/pages/add_page.dart';
 
 import 'package:vibe_flutter/pages/home_page.dart';
 import 'package:vibe_flutter/pages/profile.dart';
@@ -28,7 +26,7 @@ class _NavBarokState extends State<NavBarok> {
   final _pages = [
     HomePage(),
     Accepted(),
-    Cerca(),
+    Add(),
     Profile(),
   ];
 
@@ -55,8 +53,8 @@ class _NavBarokState extends State<NavBarok> {
                   text: 'Home',
                 ),
                 GButton(
-                  icon: Icons.search,
-                  text: 'Search',
+                  icon: Icons.add,
+                  text: 'Add',
                 ),
                 GButton(
                   icon: Icons.add_task,

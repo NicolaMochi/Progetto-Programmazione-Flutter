@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'package:vibe_flutter/pages/accepted_page.dart';
-import 'package:vibe_flutter/pages/cerca_page.dart';
+
+import 'package:vibe_flutter/pages/add_page.dart';
 import 'package:vibe_flutter/pages/dettaglio_evento.dart';
 
 import 'package:vibe_flutter/pages/profile.dart';
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   final _pages = [
     HomePage(),
     Accepted(),
-    Cerca(),
+    Add(),
     Profile(),
   ];
 
@@ -50,10 +51,10 @@ class _HomePageState extends State<HomePage> {
             builder: (context) => DettaglioEvento(events: events)));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        padding: EdgeInsets.all(10),
-        height: 150,
-        color: Colors.grey.shade200,
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        padding: EdgeInsets.all(8),
+        height: 200,
+        color: Colors.grey.shade300,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       events['titolo'],
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 23,
                           color: Colors.orangeAccent,
                           fontWeight: FontWeight.bold),
                     ),
@@ -92,19 +93,50 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(
+                          Icons.where_to_vote,
+                          color: Colors.orangeAccent,
+                        ),
+                        Text(
+                          events['citta'],
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          events['indirizzo'],
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
             SizedBox(
-              width: 90,
+              width: 40,
             ),
             Flexible(
-              fit: FlexFit.tight,
+              fit: FlexFit.loose,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisSize: MainAxisSize.min,
                   children: [

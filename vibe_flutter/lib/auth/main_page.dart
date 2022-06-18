@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vibe_flutter/auth/auth_page.dart';
-import 'package:vibe_flutter/pages/Navbar.dart';
+import 'package:vibe_flutter/navbar/NavBar.dart';
 
 import 'package:vibe_flutter/pages/home_page.dart';
 
