@@ -135,7 +135,9 @@ class _ProfileState extends State<Profile> {
           const SizedBox(
             height: 85,
           ),
-          TextFieldWidget(label: "Full name:"),
+          TextFieldWidget(
+            label: "Full name:",
+          ),
           Text(
             full_name.toString(),
             style: TextStyle(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:vibe_flutter/pages/accepted_page.dart';
-import 'package:vibe_flutter/pages/add_page.dart';
 
 import 'package:vibe_flutter/pages/home_page.dart';
 import 'package:vibe_flutter/pages/profile.dart';
@@ -25,8 +23,6 @@ class _NavBarokState extends State<NavBarok> {
 
   final _pages = [
     HomePage(),
-    Accepted(),
-    Add(),
     Profile(),
   ];
 
@@ -51,14 +47,6 @@ class _NavBarokState extends State<NavBarok> {
                 GButton(
                   icon: Icons.home,
                   text: 'Home',
-                ),
-                GButton(
-                  icon: Icons.add,
-                  text: 'Add',
-                ),
-                GButton(
-                  icon: Icons.add_task,
-                  text: 'Accepted',
                 ),
                 GButton(
                   icon: Icons.person,

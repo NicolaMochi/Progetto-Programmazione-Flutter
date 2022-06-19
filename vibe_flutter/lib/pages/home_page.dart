@@ -4,9 +4,6 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import 'package:vibe_flutter/pages/accepted_page.dart';
-
-import 'package:vibe_flutter/pages/add_page.dart';
 import 'package:vibe_flutter/pages/dettaglio_evento.dart';
 
 import 'package:vibe_flutter/pages/profile.dart';
@@ -21,18 +18,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   // to navigate in bottom bar
-  void _navigationBottombar(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  final _pages = [
-    HomePage(),
-    Accepted(),
-    Add(),
-    Profile(),
-  ];
 
   late Query _ref;
 

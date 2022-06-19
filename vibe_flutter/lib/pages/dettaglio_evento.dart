@@ -1,4 +1,6 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class DettaglioEvento extends StatefulWidget {
   Map events = Map(); // map of events that we will receive from homepage events
@@ -21,18 +23,23 @@ class _DettaglioEventoState extends State<DettaglioEvento> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
+        color: Colors.white,
         child: Column(
           children: <Widget>[
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.orange.shade200,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(40),
-                    bottomRight: Radius.circular(40),
-                  ),
-                  //image:DecorationImage(image: )
-                ),
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+              color: Colors.white,
+              width: 300,
+              height: 300,
+              child: Text(
+                "Get your vibes!",
+                style: TextStyle(
+                    fontSize: 60,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orangeAccent),
+                textAlign: TextAlign.center,
               ),
             ),
             Expanded(

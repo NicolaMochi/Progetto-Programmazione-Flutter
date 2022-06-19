@@ -1,11 +1,15 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:vibe_flutter/auth/main_page.dart';
 
 import 'package:vibe_flutter/pages/backup_home_page.dart';
 
 import 'package:vibe_flutter/navbar/NavBar.dart';
 import 'package:vibe_flutter/pages/home_page.dart';
+import 'package:vibe_flutter/splash_screen/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: SplashScreen(),
     );
   }
 }
