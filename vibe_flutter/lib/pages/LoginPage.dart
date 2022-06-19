@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:vibe_flutter/pages/Reg.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -12,6 +14,7 @@ class LoginPage extends StatefulWidget {
 
 // prova prova
 class _LoginPageState extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>(); //key for form
   // text controllers
 
   final _emailController = TextEditingController();
@@ -21,11 +24,30 @@ class _LoginPageState extends State<LoginPage> {
 
 // log in autenticato email password
   Future signIn() async {
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (error) {
+      var errorMessage = '';
+      if (error.code == 'user-not-found') {
+        errorMessage = 'No user found for that email.';
+      } else if (error.code == 'wrong-password') {
+        errorMessage = 'Wrong password provided for that user.';
+      }
+      print(errorMessage);
+      errorEmail(errorMessage);
+    }
+  }
+
+  String? errorMessage = "";
+
+  void errorEmail(String? error) {
+    setState(() {
+      errorMessage = error;
+    });
   }
 
   @override
@@ -39,129 +61,168 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amberAccent[300],
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 10),
-                Text(
-                  'LOGIN',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 49,
-                      color: Colors.orangeAccent),
+      body: Form(
+        key: formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 130),
+              Text(
+                'Get your vibes',
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 49,
+                  color: Color(0xFFBD4705),
                 ),
-                SizedBox(height: 200),
+              ),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              SizedBox(height: 180),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.orangeAccent[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Email',
+                      ),
+                      validator: validateEmail,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+
+              // password textfield
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.orangeAccent[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextFormField(
+                      controller: _passwordController,
+                      validator: validatePassword,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: isPasswordVisible
+                              ? Icon(Icons.visibility_off)
+                              : Icon(Icons.visibility),
+                          onPressed: () => setState(
+                              () => isPasswordVisible = !isPasswordVisible),
+                        ),
+                        border: InputBorder.none,
+                        hintText: 'Password',
+                      ),
+                      obscureText: isPasswordVisible,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+
+              Center(
+                child: Text(
+                  errorMessage.toString(),
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              SizedBox(height: 60),
+
+              // sign in button
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                child: GestureDetector(
+                  onTap: () async {
+                    if (formKey.currentState!.validate()) {
+                      signIn();
+                    }
+                  },
                   child: Container(
+                    padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.orangeAccent[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Email',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30),
-
-                // password textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.orangeAccent[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            icon: isPasswordVisible
-                                ? Icon(Icons.visibility_off)
-                                : Icon(Icons.visibility),
-                            onPressed: () => setState(
-                                () => isPasswordVisible = !isPasswordVisible),
-                          ),
-                          border: InputBorder.none,
-                          hintText: 'Password',
-                        ),
-                        obscureText: isPasswordVisible,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 60),
-
-                // sign in button
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 100.0),
-                  child: GestureDetector(
-                    onTap: signIn,
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          color: Colors.orangeAccent,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Center(
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // not registered?
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Not have an account?'),
-                    GestureDetector(
-                      onTap: widget.showRegisterPage,
+                        color: Color(0xFFBD4705),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Center(
                       child: Text(
-                        'Register here',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        'Login',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ],
+              ),
+              SizedBox(height: 20),
 
-              // email text
+              // not registered?
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Not have an account?'),
+                  GestureDetector(
+                    onTap: widget.showRegisterPage,
+                    child: Text(
+                      'Register here',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ],
 
-              // pass text
+            // email text
 
-              // login
+            // pass text
 
-              // don t have an account register here
-            ),
+            // login
+
+            // don t have an account register here
           ),
         ),
       ),
     );
   }
+}
+
+String? validateEmail(String? formEmail) {
+  if (formEmail == null || formEmail.isEmpty) {
+    return "Email address is required.";
+  }
+  String pattern = r'\w+@\w+\.\w+'; // indica la chiocciola
+  RegExp regex = RegExp(pattern);
+  if (!regex.hasMatch(formEmail)) {
+    return "Email missing @!";
+  }
+  return null;
+}
+
+String? validatePassword(String? formPassword) {
+  if (formPassword == null || formPassword.isEmpty) {
+    return " Password is required.";
+  }
+  if (formPassword.length < 6) {
+    return "Password must have at least 6 charachters.";
+  }
+  return null;
 }

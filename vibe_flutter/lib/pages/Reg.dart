@@ -97,7 +97,6 @@ class _RegisterState extends State<Register> {
         // aggiungi dettagli utente
         addUserDetails(name, surname, password, state, birth, description);
       } on FirebaseAuthException catch (error) {
-        print(error);
         var errorMessage = error.message;
         errorEmail(errorMessage);
       }
@@ -173,7 +172,10 @@ class _RegisterState extends State<Register> {
                 height: 10,
               ),
               Center(
-                child: Text(errorMessage.toString()),
+                child: Text(
+                  errorMessage.toString(),
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
