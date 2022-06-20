@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vibe_flutter/pages/Reg.dart';
+import 'package:vibe_flutter/auth/Reg.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;

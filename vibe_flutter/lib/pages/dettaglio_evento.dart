@@ -104,7 +104,7 @@ class _DettaglioEventoState extends State<DettaglioEvento> {
                         Text(
                           widget.events['categoria'],
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -123,21 +123,21 @@ class _DettaglioEventoState extends State<DettaglioEvento> {
                         Text(
                           widget.events['citta'],
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          ', ',
+                          ',',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           widget.events['indirizzo'],
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

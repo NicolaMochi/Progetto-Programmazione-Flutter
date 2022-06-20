@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vibe_flutter/pages/LoginPage.dart';
+import 'package:vibe_flutter/auth/LoginPage.dart';
 
-import 'package:vibe_flutter/pages/Reg.dart';
+import 'package:vibe_flutter/auth/Reg.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);

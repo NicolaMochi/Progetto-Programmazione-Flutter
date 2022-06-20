@@ -361,8 +361,9 @@ String? validatePassword(String? formPassword) {
 }
 
 String? validateBirth(String? formBirth) {
+  DateTime dateTime = DateTime.parse(formBirth.toString());
+
   if (formBirth == null || formBirth.isEmpty) {
     return " Date of birth is required.";
   }
-  return null;
 }

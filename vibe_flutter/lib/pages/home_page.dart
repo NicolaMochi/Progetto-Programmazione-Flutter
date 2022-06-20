@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        height: 200,
+        height: 250,
         decoration: BoxDecoration(
           color: Colors.orange.shade100,
           borderRadius: BorderRadius.circular(16),
@@ -101,21 +101,21 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     events['citta'],
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: 13,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     ', ',
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     events['indirizzo'],
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     events['categoria'],
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

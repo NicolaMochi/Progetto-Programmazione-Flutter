@@ -44,6 +44,7 @@ dependencies:
   file_picker: ^4.6.1
   image_picker: ^0.8.5+3
   animated_splash_screen: ^1.2.0
+  flutter_launcher_icons: ^0.9.3
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,12 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo_ok.png"
+  adaptive_icon_background: #ffbd4705
 
 # The following section is specific to Flutter packages.
 flutter:
