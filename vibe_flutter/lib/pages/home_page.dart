@@ -4,9 +4,9 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import 'package:vibe_flutter/pages/dettaglio_evento.dart';
+import 'package:vibe_flutter/pages/dettaglio_evento_page.dart';
 
-import 'package:vibe_flutter/pages/profile.dart';
+import 'package:vibe_flutter/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

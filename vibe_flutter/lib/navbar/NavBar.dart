@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'package:vibe_flutter/pages/home_page.dart';
-import 'package:vibe_flutter/pages/profile.dart';
+import 'package:vibe_flutter/pages/profile_page.dart';
 
-class NavBarok extends StatefulWidget {
-  const NavBarok({Key? key}) : super(key: key);
+class NavBar extends StatefulWidget {
+  const NavBar({Key? key}) : super(key: key);
 
   @override
-  State<NavBarok> createState() => _NavBarokState();
+  State<NavBar> createState() => _NavBarState();
 }
 
-class _NavBarokState extends State<NavBarok> {
+class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
   // to navigate in bottom bar
   void _navigationBottombar(int index) {

@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             // se lo user c e allora ok e vai in homepage
-            return NavBarok();
+            return NavBar();
           } else {
             return AuthPage(); // dalla auth page sara o loginpage o register page
           }

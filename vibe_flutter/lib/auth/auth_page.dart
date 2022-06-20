@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vibe_flutter/auth/LoginPage.dart';
+import 'package:vibe_flutter/auth/login_page.dart';
 
-import 'package:vibe_flutter/auth/Reg.dart';
+import 'package:vibe_flutter/auth/register_page.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -25,7 +25,9 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     if (showLoginPage) {
-      return LoginPage(showRegisterPage: toggleScreens);
+      return LoginPage(
+          showRegisterPage:
+              toggleScreens); // qui la prima volta show register page é false, quindi va nel login, finché non clicco su 'register here'
     } else {
       return Register(
           showLoginPage:

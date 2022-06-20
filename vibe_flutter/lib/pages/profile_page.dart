@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:vibe_flutter/main.dart';
-import 'package:vibe_flutter/pages/textfield_widget.dart';
+import 'package:vibe_flutter/widget/textfield_widget.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
